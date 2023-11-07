@@ -1,0 +1,47 @@
+//#1
+
+function cakes(recipe, available) {
+  let maxCakes = 0
+  for (let ingredient in recipe) {
+    if (available[ingredient]) {
+      const possibleCakes = Math.floor(
+        available[ingredient] / recipe[ingredient]
+      )
+      if (!maxCakes || possibleCakes < maxCakes) {
+        maxCakes = possibleCakes
+      }
+    } else {
+      return 0
+    }
+  }
+  
+  return maxCakes
+}
+
+//#2
+
+function incrementString(input) {
+  if(isNaN(parseInt(input[input.length - 1]))) return input + '1';
+  return input.replace(/(0*)([0-9]+$)/, function(match, p1, p2) {
+    var up = parseInt(p2) + 1;
+    return up.toString().length > p2.length ? p1.slice(0, -1) + up : p1 + up;
+  });
+}
+
+#3
+
+function narcissistic(value) {
+  const power = value.toString().length
+  // String => make array => exponentation every digit => get sum of them
+  const sumOfDigits = value.toString()  
+                            .split('')
+                            .map(item => item**power)
+                            .reduce((acc, item) => {
+                              return acc += item
+                            }, 0)
+  // compare result with initial value                            
+  if (sumOfDigits === value) return true
+  
+  return false
+  
+}
